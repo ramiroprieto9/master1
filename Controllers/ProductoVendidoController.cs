@@ -15,11 +15,11 @@ namespace MiPrimeraApi.Controllers
             return ProductoVendidoHandler.EliminarProductosVendidos(idProducto);
         }
 
-        //[HttpGet("{idUsuario}")]
-        //public List<Producto> TraerProductoVendido(long idUsuario)
-        //{
-        //    List<Models.ProductoVendido> producto = new List<Models.ProductoVendido>();
-        //    return ProductoVendidoHandler.TraerProductosVendidos(idUsuario);
-        //}
+        [HttpGet("{idUsuario}")]
+        public List<Producto> TraerProductoVendido(long idUsuario)
+        {
+            List<Models.ProductoVendido> producto = new List<Models.ProductoVendido>();
+            return ProductoVendidoHandler.TraerProductosVendidos(idUsuario);
+        }
     }
 }

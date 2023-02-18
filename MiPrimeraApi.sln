@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiPrimeraApi", "MiPrimeraApi.csproj", "{27903DE4-D73E-4C90-9922-4EA237D0870F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proyecto Final CoderHouse", "Proyecto Final CoderHouse.csproj", "{27903DE4-D73E-4C90-9922-4EA237D0870F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

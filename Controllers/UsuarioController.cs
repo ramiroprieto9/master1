@@ -9,18 +9,18 @@ namespace MiPrimeraApi.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-        //[HttpGet("{usuario}/{contrasena}")]
-        //public Usuario InicioSesion(string usuario, string contrasena)
-        //{
-        //    return UsuarioHandler.InicioSesion(usuario, contrasena);
-        //}
+        [HttpGet("{usuario}/{contrasena}")]
+        public Usuario InicioSesion(string usuario, string contrasena)
+        {
+            return UsuarioHandler.InicioSesion(usuario, contrasena);
+        }
 
-        //[HttpPost]
-        //public Usuario CrearUsuario(Usuario usuario)
-        //{
-        //    UsuarioHandler.CrearUsuario(usuario);
-        //    return usuario;
-        //}
+        [HttpPost]
+        public Usuario CrearUsuario(Usuario usuario)
+        {
+            UsuarioHandler.CrearUsuario(usuario);
+            return usuario;
+        }
 
         [HttpPut]
         public int ModificarUsuario(Usuario usuario)
@@ -29,16 +29,16 @@ namespace MiPrimeraApi.Controllers
 
         }
 
-        //[HttpGet("{usuario}")]
-        //public Usuario TraerUsuario(string usuario)
-        //{
-        //    return UsuarioHandler.TraerUsuario(usuario);
-        //}
+        [HttpGet("{usuario}")]
+        public Usuario TraerUsuario(string usuario)
+        {
+            return UsuarioHandler.TraerUsuario(usuario);
+        }
 
-        //[HttpDelete("{id}")]
-        //public int EliminarUsuario(long id)
-        //{
-        //    return UsuarioHandler.EliminarUsuario(id);
-        //}
+        [HttpDelete("{id}")]
+        public int EliminarUsuario(long id)
+        {
+            return UsuarioHandler.EliminarUsuario(id);
+        }
     }
 }

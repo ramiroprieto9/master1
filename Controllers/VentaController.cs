@@ -9,11 +9,17 @@ namespace MiPrimeraApi.Controllers
     [ApiController]
     public class VentaController : ControllerBase
     {
-        //[HttpGet("{idUsuario}")]
-        //public List<Venta> TraerVentas (long idUsuario)
-        //{
-        //    List<Models.Venta> ventas = new List<Models.Venta>();
-        //    return VentasHandler.TraerVentas(idUsuario);
-        //}
+        [HttpGet("{idUsuario}")]
+        public List<Venta> TraerVentas(long idUsuario)
+        {
+            List<Models.Venta> ventas = new List<Models.Venta>();
+            return VentaHandler.TraerVentas(idUsuario);
+        }
+
+        [HttpPost("{idUsuario}")]
+        public void CargarVenta (long idUsuario, List<Producto> productosVendidos)
+        {
+            VentaHandler.CargarVenta(idUsuario, productosVendidos);
+        }
     }
 }

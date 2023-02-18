@@ -10,62 +10,68 @@ namespace MiPrimeraApi.Repository
     {
         public static string cadenaConexion = "Data Source=LAPTOP-TLQMACS5;Initial Catalog=SistemaGestion;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-        //public static List<Models.Producto> TraerProducto(long idUsuario)
-        //{
-        //    List<Models.Producto> producto = new List<Models.Producto>();
-        //    using (SqlConnection conn = new SqlConnection(cadenaConexion))
-        //    {
-                
-        //        SqlCommand comando2 = new SqlCommand($"SELECT * FROM Producto WHERE IdUsuario = @idUsuario ", conn);
-        //        comando2.Parameters.AddWithValue("@idUsuario", idUsuario);
+        public static List<Models.Producto> TraerProducto(long idUsuario)
+        {
+            List<Models.Producto> producto = new List<Models.Producto>();
+            using (SqlConnection conn = new SqlConnection(cadenaConexion))
+            {
+
+                SqlCommand comando2 = new SqlCommand($"SELECT * FROM Producto WHERE IdUsuario = @idUsuario ", conn);
+                comando2.Parameters.AddWithValue("@idUsuario", idUsuario);
 
 
-        //        conn.Open();
-        //        SqlDataReader reader = comando2.ExecuteReader();
-        //        if (reader.HasRows)
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                Models.Producto productoTemporal = new Models.Producto();
-        //                productoTemporal.Id = reader.GetInt64(0);
-        //                productoTemporal.Descripciones = reader.GetString(1);
-        //                productoTemporal.Costo = reader.GetDecimal(2);
-        //                productoTemporal.PrecioVenta = reader.GetDecimal(3);
-        //                productoTemporal.Stock = reader.GetInt32(4);
-        //                productoTemporal.IdUsuario = reader.GetInt64(5);
+                conn.Open();
+                SqlDataReader reader = comando2.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Models.Producto productoTemporal = new Models.Producto();
+                        productoTemporal.Id = reader.GetInt64(0);
+                        productoTemporal.Descripciones = reader.GetString(1);
+                        productoTemporal.Costo = reader.GetDecimal(2);
+                        productoTemporal.PrecioVenta = reader.GetDecimal(3);
+                        productoTemporal.Stock = reader.GetInt32(4);
+                        productoTemporal.IdUsuario = reader.GetInt64(5);
 
-        //                producto.Add(productoTemporal);
-        //            }
-                    
-        //        }
-        //        return producto;
+                        producto.Add(productoTemporal);
+                    }
 
-        //    }
+                }
+                return producto;
 
-        //}
+            }
+
+        }
 
 
-        //public static Models.Producto TraerProducto2(long idProducto)
-        //{
-        //    Models.Producto producto = new Models.Producto();
-        //    using (SqlConnection conn = new SqlConnection(cadenaConexion))
-        //    {
-        //        SqlCommand comando = new SqlCommand("SELECT Producto.Descripciones FROM Producto\r\n  WHERE Producto.Id = @idProducto", conn);
-        //        comando.Parameters.AddWithValue("@idProducto", idProducto);
+        public static Producto ObtenerProducto(long idProducto)
+        {
+            Producto producto = new Producto();
+            using (SqlConnection conn = new SqlConnection(cadenaConexion))
+            {
+                SqlCommand comando = new SqlCommand("SELECT Producto.* FROM Producto\r\n  WHERE Producto.Id = @idProducto", conn);
+                comando.Parameters.AddWithValue("@idProducto", idProducto);
 
-        //        conn.Open();
+                conn.Open();
 
-        //        SqlDataReader reader = comando.ExecuteReader();
+                SqlDataReader reader = comando.ExecuteReader();
 
-        //        if (reader.HasRows)
-        //        {
-        //            reader.Read();
-
-        //            producto.Descripciones = reader.GetString(0);
-        //        }
-        //        return producto;
-        //    }
-        //}
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    producto.Id = reader.GetInt64(0);
+                    producto.Descripciones = reader.GetString(1);
+                    producto.Costo = reader.GetDecimal(2);
+                    producto.PrecioVenta = reader.GetDecimal(3);
+                    producto.Stock = reader.GetInt32(4);
+                    producto.IdUsuario = reader.GetInt64(5);
+                    return producto;
+                }
+                else Console.WriteLine("Error, no se pudo encontrar el producto buscado");
+            }
+            return null;
+        }
 
 
         public static int CrearProducto (Producto producto)
@@ -114,13 +120,13 @@ namespace MiPrimeraApi.Repository
             }
         }
 
-        
-        //public static int UpdateStockProducto (long id, int cantidadVendidos)
-        //{
-        //    Producto producto = TraerProducto2(id);
-        //    producto.Stock -= cantidadVendidos;
-        //    return ModificarProducto(producto);
-        //}
+
+        public static int UpdateStockProducto(long id, int cantidadVendidos)
+        {
+            Producto producto = ObtenerProducto(id);
+            producto.Stock -= cantidadVendidos;
+            return ModificarProducto(producto);
+        }
 
     }
 }
